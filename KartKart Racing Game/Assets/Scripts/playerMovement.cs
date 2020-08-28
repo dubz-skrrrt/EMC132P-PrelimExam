@@ -37,10 +37,11 @@ public class playerMovement : MonoBehaviour
         if (Input.GetAxis("Vertical")> 0)
         {
             speedInput = Input.GetAxis("Vertical") * forwardAccel * 500f;
+            
 
         }else if (Input.GetAxis("Vertical") < 0)
         {
-            speedInput = Input.GetAxis("Vertical") * reverseAccel * 300f;
+            speedInput = Input.GetAxis("Vertical") * reverseAccel *300f;
         }
         // lets the car rotate at the x plane
         turnInput = Input.GetAxis("Horizontal");
