@@ -22,6 +22,7 @@ public class playerMovement : MonoBehaviour
     // to access the tranform rotation of the wheels on the car
     public Transform leftFrontWheel, rightFrontWheel;
     public float maxWheelTurn = 20f;
+
     void Start()
     {
         // makes the sphere not part of the parent so as to make the car follow the sphere
@@ -44,13 +45,16 @@ public class playerMovement : MonoBehaviour
         // lets the car rotate at the x plane
         turnInput = Input.GetAxis("Horizontal");
         transform.position = theRB.transform.position;
+        
         if (grounded)
         {
             // let's the player rotate only when moving forward or backward only on ground
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0f, turnInput * turnStrength * Time.deltaTime * Input.GetAxis("Vertical"), 0f));
-
+            
         }
         // rotates the wheels to make it look natural
+
+       
         leftFrontWheel.localRotation = Quaternion.Euler(leftFrontWheel.localRotation.eulerAngles.x, turnInput * maxWheelTurn, leftFrontWheel.localRotation.eulerAngles.z);
         rightFrontWheel.localRotation = Quaternion.Euler(rightFrontWheel.localRotation.eulerAngles.x, turnInput * maxWheelTurn, rightFrontWheel.localRotation.eulerAngles.z);
     
