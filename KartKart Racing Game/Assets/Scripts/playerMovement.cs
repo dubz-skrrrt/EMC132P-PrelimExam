@@ -21,6 +21,7 @@ public class playerMovement : MonoBehaviour
 
     // to access the tranform rotation of the wheels on the car
     public Transform leftFrontWheel, rightFrontWheel;
+    
     public float maxWheelTurn = 20f;
 
     void Start()
@@ -34,14 +35,17 @@ public class playerMovement : MonoBehaviour
     {
         // gives the car forward and backward movement
         speedInput = 0f;
+        
+
         if (Input.GetAxis("Vertical")> 0)
         {
-            speedInput = Input.GetAxis("Vertical") * forwardAccel * 500f;
+            speedInput = Input.GetAxis("Vertical") * forwardAccel * 290f;
+            Debug.Log(speedInput);
             
 
         }else if (Input.GetAxis("Vertical") < 0)
         {
-            speedInput = Input.GetAxis("Vertical") * reverseAccel *300f;
+            speedInput = Input.GetAxis("Vertical") * reverseAccel *200f;
         }
         // lets the car rotate at the x plane
         turnInput = Input.GetAxis("Horizontal");

@@ -14,7 +14,7 @@ public class CarEnemyController : MonoBehaviour
     private float newSteer;
     public float maxSteerAngle = 45f;
 
-    public float forwardAccel = 8f, maxSpeed = 100f, maxMotorTorque = 80f,  currentSpeed;
+    public float maxSpeed = 100f, maxMotorTorque = 80f,  currentSpeed, decelaration = 10f;
     public WheelCollider wheelFL, WheelFR;
     // Start is called before the first frame update
     void Start()
@@ -35,7 +35,7 @@ public class CarEnemyController : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        Debug.Log(currentSpeed);
+        
         ApplySteer();
         AIMove();
         CheckWayPointDistance();
@@ -60,10 +60,14 @@ public class CarEnemyController : MonoBehaviour
 
         if (currentSpeed < maxSpeed)
         {
-            wheelFL.motorTorque = forwardAccel * maxMotorTorque;
-            WheelFR.motorTorque = forwardAccel * maxMotorTorque;
+            wheelFL.motorTorque = maxMotorTorque;
+            WheelFR.motorTorque = maxMotorTorque;
+            wheelFL.brakeTorque = 0;
+            WheelFR.brakeTorque = 0;
         }else
         {
+            wheelFL.brakeTorque = decelaration;
+            WheelFR.brakeTorque = decelaration;
             wheelFL.motorTorque = 0;
             WheelFR.motorTorque = 0;
         }
