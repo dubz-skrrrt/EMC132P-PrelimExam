@@ -7178,6 +7178,7 @@ MonoBehaviour:
   timeComplete: 0
   TimeText: {fileID: 1796807802}
   LapTimeText: {fileID: 810547395}
+  resetStartTime: 0
   completeTimes: []
 --- !u!114 &1796807802
 MonoBehaviour:
@@ -7806,7 +7807,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8630ef77b147f1e40bdded129ecc6420, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CheckpointAmt: 4
+  CheckpointAmt: 41
 --- !u!1 &1895710060
 GameObject:
   m_ObjectHideFlags: 0
@@ -9518,7 +9519,7 @@ MonoBehaviour:
   theRB: {fileID: 1924817163}
   forwardAccel: 21.5
   reverseAccel: 15
-  maxSpeed: 400
+  maxSpeed: 115
   turnStrength: 180
   gravityForce: 10
   dragOnGround: 3
