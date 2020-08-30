@@ -20,10 +20,24 @@ public class CountDownTimer : MonoBehaviour
         
         CountDownText.text = currentTime.ToString("0");
 
+        if (currentTime <= 3)
+        {
+            CountDownText.color = Color.red;
+        }
+        if (currentTime <= 2)
+        {
+            CountDownText.color = Color.red;
+        }
+        if (currentTime <= 1.5)
+        {
+            CountDownText.color = Color.yellow;
+        }
+
 
         if (currentTime <= 0)
         {
             currentTime = 0;
+            CountDownText.color = Color.green;
             CountDownText.text = "GO";
 
             timer -= 1 *Time.deltaTime;
