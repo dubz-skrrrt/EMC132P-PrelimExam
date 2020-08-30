@@ -9,6 +9,7 @@ public class LapTime : MonoBehaviour
     public float startTime;
     public float timeTaken;
     private string displayTimeLaps;
+    private int lapnumber = 0;
     public float timeComplete;
     public  Text TimeText;
     public Text LapTimeText;
@@ -17,7 +18,7 @@ public class LapTime : MonoBehaviour
     // Start is called before the first frame update
    void start()
    {
-       startTime = Time.time;
+       startTime = -4f;
    }
     // Update is called once per frame
     void Update()
@@ -26,7 +27,7 @@ public class LapTime : MonoBehaviour
         {
             //to compensate for the countdown timer
             
-            timeTaken = startTime + Time.time;
+            timeTaken = startTime + Time.timeSinceLevelLoad;
             TimeText.text = FormatTime(timeTaken);
         }
         
@@ -34,11 +35,12 @@ public class LapTime : MonoBehaviour
         {
             timeComplete = timeTaken ;
             completeTimes.Add(Mathf.Round(timeComplete * 100f)/100f);
+            lapnumber++;
             //displayTimeList();
         }
         checkTimeList();
         if (LapsAndCheckPoints.lapNumber == 3){
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene("MenuScene");
         }
     }
 
@@ -49,7 +51,7 @@ public class LapTime : MonoBehaviour
         float totalTime = time;
         int minutes = (int) (totalTime/60) % 60;
         int seconds = (int) totalTime % 60;
-        int milSec = (int) (Time.time*10) % 10;
+        int milSec = (int) (Time.timeSinceLevelLoad*10) % 10;
 
         string answer = minutes.ToString("00") + ":" + seconds.ToString("00") + "." + milSec.ToString("00");
         return answer;
@@ -62,7 +64,7 @@ public class LapTime : MonoBehaviour
     var arrayoftimes = completeTimes.ToArray();
         for (int i = 0; i < arrayoftimes.Length; i++)
         {
-            displayTimeLaps += "Lap " + LapsAndCheckPoints.lapNumber + ": " + arrayoftimes[i] + "\n";
+            displayTimeLaps += "Lap " + (i+1) + ": " + arrayoftimes[i] + "\n";
            // LapsTimeText.fontSize = 54;
 
            if (arrayoftimes.Length > 0){

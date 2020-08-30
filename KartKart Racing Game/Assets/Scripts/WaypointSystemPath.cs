@@ -9,7 +9,7 @@ public class WaypointSystemPath : MonoBehaviour
     public List<Transform> waypoint = new List<Transform>();
 
     
-    void OnDrawGizmos()
+    void OnDrawGizmosSelected()
     {
         Gizmos.color = linecolor;
         // making a waypoint system using parent-child relationship

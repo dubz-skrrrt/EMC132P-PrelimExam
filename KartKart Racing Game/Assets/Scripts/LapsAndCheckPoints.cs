@@ -10,7 +10,7 @@ public class LapsAndCheckPoints : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        lapNumber = 1; //starting Lap
+        lapNumber = 0; //starting Lap
         CheckpointIndex = 0; // Current Checkpoint
     }
 
