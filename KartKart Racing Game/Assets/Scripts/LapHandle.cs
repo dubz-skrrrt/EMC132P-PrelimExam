@@ -4,7 +4,11 @@
  public class LapHandle : MonoBehaviour {
      
      public int CheckpointAmt;
-    private void OnTriggerEnter (Collider other)
+     public static bool nextlap;
+    private void Start(){
+        nextlap = false;
+    }
+    public void OnTriggerEnter (Collider other)
      {
          
          if (!other.gameObject.CompareTag("Player")) 
@@ -12,14 +16,14 @@
 
         else
         {
-            Debug.Log("hit");
-             if (LapsAndCheckPoints.CheckpointIndex == CheckpointAmt)
+            
+             if (LapsAndCheckPoints.CheckpointIndex == CheckpointAmt && !nextlap)
              {
-                 LapsAndCheckPoints.CheckpointIndex = 0;
-                 LapsAndCheckPoints.lapNumber++;
-
-                 Debug.Log(LapsAndCheckPoints.lapNumber);
-                 Debug.Log("Next Lap");
+                LapsAndCheckPoints.CheckpointIndex = 0;
+                LapsAndCheckPoints.lapNumber++;
+                nextlap = true;
+                Debug.Log("Lap number " + LapsAndCheckPoints.lapNumber);
+                 
              }
          }
      }

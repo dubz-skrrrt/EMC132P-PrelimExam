@@ -24,7 +24,7 @@ using System.Collections;
             {
                 LapsAndCheckPoints.CheckpointIndex = Index;
 
-                Debug.Log(Index);
+                Debug.Log("Checkpoint: " + Index);
             }
  
         }

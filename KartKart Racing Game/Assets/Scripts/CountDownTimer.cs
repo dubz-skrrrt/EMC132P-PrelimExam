@@ -8,6 +8,7 @@ public class CountDownTimer : MonoBehaviour
     float startingTime = 3f;
     public static float timer = 1f;
     [SerializeField] Text CountDownText;
+    [SerializeField] Text LapTime;
     void Start()
     {
         currentTime = startingTime;

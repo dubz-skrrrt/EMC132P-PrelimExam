@@ -38,23 +38,23 @@ public class playerMovement : MonoBehaviour
         // gives the car forward and backward movement
         timer = CountDownTimer.timer;
         speedInput = 0f;
-        
+        transform.position = theRB.transform.position;
         if (timer == 0)
         {
             if (Input.GetAxis("Vertical")> 0)
             {
-                speedInput  = Input.GetAxis("Vertical") * forwardAccel * 10000f * Time.deltaTime;
+                speedInput  = Input.GetAxis("Vertical") * forwardAccel * maxSpeed;
                 
 
             }else if (Input.GetAxis("Vertical") < 0)
             {
-                speedInput = Input.GetAxis("Vertical") * reverseAccel *7000f * Time.deltaTime;
+                speedInput = Input.GetAxis("Vertical") * reverseAccel *200f;
             }
 
         
             // lets the car rotate at the x plane
             turnInput = Input.GetAxis("Horizontal");
-            transform.position = theRB.transform.position;
+            
             
             if (grounded)
             {
