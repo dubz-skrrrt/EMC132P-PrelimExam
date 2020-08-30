@@ -16,6 +16,8 @@ public class CarEnemyController : MonoBehaviour
 
     public float maxSpeed = 100f, maxMotorTorque = 80f,  currentSpeed, decelaration = 10f;
     public WheelCollider wheelFL, WheelFR;
+
+    private static float timer;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,12 +35,15 @@ public class CarEnemyController : MonoBehaviour
     }
 
     // Update is called once per frame
+   
     private void FixedUpdate()
     {
-        
+        timer = CountDownTimer.currentTime;
         ApplySteer();
         AIMove();
         CheckWayPointDistance();
+        
+        
     }
 
     private void ApplySteer()
@@ -55,21 +60,24 @@ public class CarEnemyController : MonoBehaviour
 
     private void AIMove()
     {
+        if (timer == 0)
+        {
         //adds movement to the ai
-        currentSpeed = 2 * Mathf.PI * wheelFL.radius * WheelFR.rpm * 60 / 1000;
+            currentSpeed = 2 * Mathf.PI * wheelFL.radius * WheelFR.rpm * 60 / 1000;
 
-        if (currentSpeed < maxSpeed)
-        {
-            wheelFL.motorTorque = maxMotorTorque;
-            WheelFR.motorTorque = maxMotorTorque;
-            wheelFL.brakeTorque = 0;
-            WheelFR.brakeTorque = 0;
-        }else
-        {
-            wheelFL.brakeTorque = decelaration;
-            WheelFR.brakeTorque = decelaration;
-            wheelFL.motorTorque = 0;
-            WheelFR.motorTorque = 0;
+            if (currentSpeed < maxSpeed)
+            {
+                wheelFL.motorTorque = maxMotorTorque;
+                WheelFR.motorTorque = maxMotorTorque;
+                wheelFL.brakeTorque = 0;
+                WheelFR.brakeTorque = 0;
+            }else
+            {
+                wheelFL.brakeTorque = decelaration;
+                WheelFR.brakeTorque = decelaration;
+                wheelFL.motorTorque = 0;
+                WheelFR.motorTorque = 0;
+            }
         }
        
     }

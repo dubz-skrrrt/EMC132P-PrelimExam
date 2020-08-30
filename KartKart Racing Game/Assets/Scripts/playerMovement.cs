@@ -25,6 +25,7 @@ public class playerMovement : MonoBehaviour
     
     public float maxWheelTurn = 20f;
 
+    private static float timer;
     void Start()
     {
         // makes the sphere not part of the parent so as to make the car follow the sphere
@@ -35,38 +36,38 @@ public class playerMovement : MonoBehaviour
     void Update()
     {
         // gives the car forward and backward movement
-
+        timer = CountDownTimer.timer;
         speedInput = 0f;
         
-
-        if (Input.GetAxis("Vertical")> 0)
+        if (timer == 0)
         {
-            speedInput  = Input.GetAxis("Vertical") * forwardAccel * 10000f * Time.deltaTime;
-            Debug.Log(speedInput);
-            
+            if (Input.GetAxis("Vertical")> 0)
+            {
+                speedInput  = Input.GetAxis("Vertical") * forwardAccel * 10000f * Time.deltaTime;
+                
 
-        }else if (Input.GetAxis("Vertical") < 0)
-        {
-            speedInput = Input.GetAxis("Vertical") * reverseAccel *7000f;
-        }
+            }else if (Input.GetAxis("Vertical") < 0)
+            {
+                speedInput = Input.GetAxis("Vertical") * reverseAccel *7000f * Time.deltaTime;
+            }
 
-    
-        // lets the car rotate at the x plane
-        turnInput = Input.GetAxis("Horizontal");
-        transform.position = theRB.transform.position;
         
-        if (grounded)
-        {
-            // let's the player rotate only when moving forward or backward only on ground
-            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0f, turnInput * turnStrength * Time.deltaTime * Input.GetAxis("Vertical"), 0f));
+            // lets the car rotate at the x plane
+            turnInput = Input.GetAxis("Horizontal");
+            transform.position = theRB.transform.position;
             
-        }
-        // rotates the wheels to make it look natural
+            if (grounded)
+            {
+                // let's the player rotate only when moving forward or backward only on ground
+                transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0f, turnInput * turnStrength * Time.deltaTime * Input.GetAxis("Vertical"), 0f));
+                
+            }
+            // rotates the wheels to make it look natural
 
-       
-        leftFrontWheel.localRotation = Quaternion.Euler(leftFrontWheel.localRotation.eulerAngles.x, turnInput * maxWheelTurn, leftFrontWheel.localRotation.eulerAngles.z);
-        rightFrontWheel.localRotation = Quaternion.Euler(rightFrontWheel.localRotation.eulerAngles.x, turnInput * maxWheelTurn, rightFrontWheel.localRotation.eulerAngles.z);
-    
+        
+            leftFrontWheel.localRotation = Quaternion.Euler(leftFrontWheel.localRotation.eulerAngles.x, turnInput * maxWheelTurn, leftFrontWheel.localRotation.eulerAngles.z);
+            rightFrontWheel.localRotation = Quaternion.Euler(rightFrontWheel.localRotation.eulerAngles.x, turnInput * maxWheelTurn, rightFrontWheel.localRotation.eulerAngles.z);
+        }
     }
 
     private void FixedUpdate()
